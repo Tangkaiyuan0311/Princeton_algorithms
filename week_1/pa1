@@ -1,0 +1,12 @@
+#!/bin/bash
+# script file for hw1
+
+javac ./HelloWorld.java
+
+javac ./HelloGoodbye.java
+#java HelloGoodbye Kevin Bob
+
+javac -classpath /home/tky/algs4 ./RandomWord.java
+#java -classpath /home/tky/algs4:. RandomWord
+
+zip hello.zip HelloWorld.java HelloGoodbye.java RandomWord.java
