@@ -14,7 +14,7 @@ public class Percolation {
     // compute the index of given site coordinate, considering 2 virtual site and row major storage 
     private static int coord2index(int row, int col, int grid_size) {	
 	if ((row < 1 || row > grid_size) || (col < 1 || col > grid_size)) {
-	    throw new IllegalArgumentException("coordinate is not between 0 and " + grid_size);
+	    throw new IllegalArgumentException("coordinate is not between 1 and " + grid_size);
 	}
 	int index = (row - 1) * grid_size + col;
 	return index;
