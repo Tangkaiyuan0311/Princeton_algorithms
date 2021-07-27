@@ -1,8 +1,10 @@
 #!/bin/bash
-# script file for hw1
+# script file for pa2
 
 javac  -classpath /home/tky/algs4:. ./Percolation.java
-java -classpath /home/tky/algs4:. Percolation
+# java -classpath /home/tky/algs4:. Percolation
 
 javac  -classpath /home/tky/algs4:. ./PercolationStats.java
-java  -classpath /home/tky/algs4:. PercolationStats
+# java  -classpath /home/tky/algs4:. PercolationStats 200 100
+
+zip percolation.zip Percolation.java PercolationStats.java

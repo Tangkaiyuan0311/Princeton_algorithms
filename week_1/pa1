@@ -1,5 +1,5 @@
 #!/bin/bash
-# script file for hw1
+# script file for pa1
 
 javac ./HelloWorld.java
 
