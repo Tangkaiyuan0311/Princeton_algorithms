@@ -12,6 +12,8 @@ public class Shell {
 				for (int j = i; j >= h; j -= h) {
 					if (less(a[j], a[j-h]))
 						exch(a, j, j-h);
+					else
+						break;
 				}
 			}
 		}
