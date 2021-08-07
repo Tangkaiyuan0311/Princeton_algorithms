@@ -1,0 +1,8 @@
+#!/bin/bash
+# script file for pa
+
+javac ./Deque.java
+
+javac ./Evaluate.java
+
+java Evaluate < test.txt
