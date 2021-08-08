@@ -2,7 +2,16 @@
 # script file for pa
 
 javac ./Deque.java
+# java Deque
+# javac ./Evaluate.java
 
-javac ./Evaluate.java
+# java Evaluate < test.txt
 
-java Evaluate < test.txt
+javac -classpath /home/tky/algs4:. ./RandomizedQueue.java
+# java -classpath /home/tky/algs4:. RandomizedQueue
+
+javac -classpath /home/tky/algs4:. ./Permutation.java
+java -classpath /home/tky/algs4:. Permutation 6 < distinct.txt
+java -classpath /home/tky/algs4:. Permutation 0 < distinct.txt
+
+zip queues.zip Deque.java RandomizedQueue.java Permutation.java

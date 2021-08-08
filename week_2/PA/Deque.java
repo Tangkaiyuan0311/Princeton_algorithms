@@ -41,6 +41,8 @@ public class Deque<Item> implements Iterable<Item> {
 		first.prev = null;
 		if (old_first == null) // empty deque
 			last = first;
+		else
+			old_first.prev = first;
 		N++;
 	}
 
@@ -68,7 +70,7 @@ public class Deque<Item> implements Iterable<Item> {
 			throw new java.util.NoSuchElementException("empty deque");
 		Item item = first.item;
 		first = first.next;
-		if (first == null) // empty deque
+		if (first == null) // empty deque after remove
 			last = null;
 		else
 			first.prev = null;
@@ -117,7 +119,45 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing (required)
     public static void main(String[] args) {
-		var queue = new Deque<String>();
+		var queue = new Deque<Integer>();
+		for (int i = 0; i < 5; i++) {
+			queue.addFirst(i);
+			assert(queue.size() == (i+1));
+			for (int j : queue)
+				System.out.print(j + " ");
+			System.out.println();
+
+		}
+		System.out.println();
+		for (int i = 0; i < 5; i++) {
+            queue.addLast(i);
+            assert(queue.size() == (i+6));
+            for (int j : queue)
+                System.out.print(j + " ");
+			System.out.println();
+
+        }
+		System.out.println();
+		for (int i = 0; i < 5; i++) {
+            queue.removeFirst();
+            for (int j : queue)
+                System.out.print(j + " ");
+			System.out.println();
+
+        }
+		System.out.println();
+		for (int i = 0; i < 5; i++) {
+            queue.removeLast();
+            for (int j : queue)
+                System.out.print(j + " ");
+			System.out.println();
+
+        }
+		queue.removeLast();
+		System.out.println();
+
+
+		/*
 		System.out.println("empty deque? " + queue.isEmpty());
 		queue.addFirst("a");
 		queue.addLast("b");
@@ -131,7 +171,13 @@ public class Deque<Item> implements Iterable<Item> {
 		System.out.println("size = " + queue.size());
 		String a;
 		a = queue.removeFirst();
-		assert(a.equals("c"));
+		
+		for (int i = 0; i < 5; i++) {
+            queue.removeFirst(i);
+            for (int j : queue)
+                System.out.println(j + " ");
+
+        }assert(a.equals("c"));
 		a = queue.removeLast();
 		assert(a.equals("d"));
 		System.out.println("expected output: " + "a b");
@@ -144,6 +190,7 @@ public class Deque<Item> implements Iterable<Item> {
 		while (true) {
 			queue.removeLast();
 		}
+		*/
 
 	}
 
