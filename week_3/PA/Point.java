@@ -87,21 +87,16 @@ public class Point implements Comparable<Point> {
      *         argument point
      */
     public int compareTo(Point that) {
-		double x0 = this.x;
-        double y0 = this.y;
-        double x1 = that.x;
-        double y1 = that.y;
+		Integer x0 = this.x;
+        Integer y0 = this.y;
+        Integer x1 = that.x;
+        Integer y1 = that.y;
+		int y_test = y0.compareTo(y1);
 
-        if (y0 < y1)
-			return -1;
-		else if (y0 > y1)
-			return 1;
-		else if (x0 < x1)
-			return -1;
-		else if (x0 > x1)
-			return 1;
+		if (y_test != 0)
+			return y_test;
 		else
-			return 0;
+			return x0.compareTo(x1);
     }
 
     /**
@@ -151,6 +146,7 @@ public class Point implements Comparable<Point> {
 		assert (p0.slopeTo(p0) == Double.NEGATIVE_INFINITY);
 		Comparator<Point> p0_comp = p0.slopeOrder();
 		assert (p0_comp.compare(p3, p2) > 0);
+		System.out.println("success!");
 
 
     }
