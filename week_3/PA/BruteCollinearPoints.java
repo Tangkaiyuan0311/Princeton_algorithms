@@ -2,7 +2,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Bag;
-import java.util.*;
+import java.util.Arrays;
 
 public class BruteCollinearPoints {
 	private final Point[] in_points;
@@ -14,17 +14,23 @@ public class BruteCollinearPoints {
 		if (points == null)
 			throw new IllegalArgumentException("null argument");
 		in_points = new Point[points.length];
-		for (int i = 0; i < points.length; i++)
-			in_points[i] = points[i];
+		for (int i = 0; i < points.length; i++) {
+			if (points[i] != null)
+				in_points[i] = points[i];
+			else
+				throw new IllegalArgumentException("null argument");
+		}
 		Arrays.sort(in_points);
-		if (in_points[0] == null)
-			throw new IllegalArgumentException("invalid array elements");
 		for (int i = 1; i < in_points.length; i++) {
-			if (in_points[i] == null || in_points[i].equals(in_points[i-1]))
+			if (in_points[i].equals(in_points[i-1]))
 				throw new IllegalArgumentException("invalid array elements");
 		}
 		numSegs = 0;
 		segBag = new Bag<LineSegment>();
+		if (points.length >= 4) {
+			findSegs();
+		}
+
 	}
 
 	private boolean checkLine(Point p, Point q, Point r, Point s) { // asssume: p q r s are in order
@@ -38,19 +44,23 @@ public class BruteCollinearPoints {
 	public int numberOfSegments() {
 		return numSegs;
 	}
+
+	private void findSegs() {
+		int N = in_points.length;
+        for (int i = 0; i <= N-4; i++)
+            for (int j = i+1; j <= N-3; j++)
+                for (int k = j+1; k <= N-2; k++)
+                    for (int l = k+1; l <= N-1; l++) {
+                        if (checkLine(in_points[i], in_points[j], in_points[k], in_points[l])) {
+                            segBag.add(new LineSegment(in_points[i], in_points[l]));
+                            numSegs++;
+                        }
+                    }
+	}
 	
 	// the line segments
 	public LineSegment[] segments() {
-		int N = in_points.length;
-		for (int i = 0; i <= N-4; i++)
-			for (int j = i+1; j <= N-3; j++)
-				for (int k = j+1; k <= N-2; k++)
-					for (int l = k+1; l <= N-1; l++) {
-						if (checkLine(in_points[i], in_points[j], in_points[k], in_points[l])) {
-							segBag.add(new LineSegment(in_points[i], in_points[l]));
-							numSegs++;
-						}
-					}
+		
 		var lines = new LineSegment[numSegs];
 		int i = 0;
 		for (var line : segBag)

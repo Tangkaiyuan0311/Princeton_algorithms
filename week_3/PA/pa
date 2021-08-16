@@ -1,10 +1,15 @@
 #!/bin/bash
 # script file for pa
 
-javac -classpath /home/tky/algs4:. ./Point.java
+# javac -classpath /home/tky/algs4:. ./Point.java
 # java -classpath /home/tky/algs4:. Point
 
-javac -classpath /home/tky/algs4:. ./LineSegment.java
+# javac -classpath /home/tky/algs4:. ./LineSegment.java
 
 javac -classpath /home/tky/algs4:. ./BruteCollinearPoints.java
-java -classpath /home/tky/algs4:. BruteCollinearPoints ./input8.txt
+#java -classpath /home/tky/algs4:. BruteCollinearPoints ./input400.txt
+
+javac -classpath /home/tky/algs4:. ./FastCollinearPoints.java
+#java -classpath /home/tky/algs4:. FastCollinearPoints ./input400.txt
+
+zip collinear.zip Point.java BruteCollinearPoints.java FastCollinearPoints.java

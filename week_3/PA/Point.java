@@ -142,6 +142,7 @@ public class Point implements Comparable<Point> {
 		assert (p0.compareTo(p2) < 0);
 		assert (p0.slopeTo(p3) == 0.5);
 		assert (p0.slopeTo(p1) == Double.POSITIVE_INFINITY);
+		assert (Double.POSITIVE_INFINITY == Double.POSITIVE_INFINITY);
 		assert (p0.slopeTo(p2) == +0.0);
 		assert (p0.slopeTo(p0) == Double.NEGATIVE_INFINITY);
 		Comparator<Point> p0_comp = p0.slopeOrder();
