@@ -1,0 +1,8 @@
+#!/bin/bash
+# script file for pa
+
+javac -classpath /home/tky/algs4:. ./MaxPQ.java
+# java -classpath /home/tky/algs4:. MaxPQ
+
+javac -classpath /home/tky/algs4:. ./SortCompare.java
+java -classpath /home/tky/algs4:. SortCompare Insertion Heap 2000 100
