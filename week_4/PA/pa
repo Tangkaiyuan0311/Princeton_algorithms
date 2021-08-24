@@ -1,0 +1,5 @@
+#!/bin/bash
+# script file for pa
+
+javac -classpath /home/tky/algs4:. ./Board.java
+java -classpath /home/tky/algs4:. Board puzzle19.txt puzzle00.txt
