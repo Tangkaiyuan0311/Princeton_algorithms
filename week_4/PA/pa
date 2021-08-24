@@ -2,4 +2,7 @@
 # script file for pa
 
 javac -classpath /home/tky/algs4:. ./Board.java
-java -classpath /home/tky/algs4:. Board puzzle19.txt puzzle00.txt
+# java -classpath /home/tky/algs4:. Board puzzle19.txt puzzle00.txt
+
+javac -classpath /home/tky/algs4:. ./Solver.java
+java -classpath /home/tky/algs4:. Solver puzzle12.txt
