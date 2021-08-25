@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.MinPQ;
 
 public class Solver {
 
-	private MinPQ<Node> pq;
+	// private MinPQ<Node> pq;
 	// private int moves;
 	private Node goal; // termination node
 	private boolean solvable;
@@ -18,26 +18,30 @@ public class Solver {
 		public final Board board;
 		public final int moves;
 		public final Node prev;
-		public final int hamming;
+		// public final int hamming;
 		public final int manhattan;
 		public Node(Board board, int moves, Node prev) {
 			this.board = board;
 			this.moves = moves;
 			this.prev = prev;
-			this.hamming = board.hamming();
+			// this.hamming = board.hamming();
 			this.manhattan = board.manhattan();
 		}
 	}
+	/*
 	private class hamming_order implements Comparator<Node> {
         public int compare(Node x, Node y) {
             return (x.hamming+x.moves) - (y.hamming+y.moves);
         }
     }
+	*/
+	
     private class manhattan_order implements Comparator<Node> {
 		public int compare(Node x, Node y) {
 			return (x.manhattan+x.moves) - (y.manhattan+y.moves);
         }
     }
+	
 
 	private int process(MinPQ<Node> pq) {
 		Node current_node = pq.delMin();
@@ -45,26 +49,27 @@ public class Solver {
 			goal = current_node;
 			return 1;
 		}
-		else
+		else {
 			for (var neighbor : current_node.board.neighbors()) {
-				if ((current_node.prev != null) && (neighbor.equals(current_node.prev.board)))
-					continue;
-				else
+				if ((current_node.prev == null) || (!neighbor.equals(current_node.prev.board)))
 					pq.insert(new Node(neighbor, current_node.moves+1, current_node));
 			}
+		}
 		return 0;
 	}
 	
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
+		if (initial == null) 
+			throw new IllegalArgumentException("null constructor argument");
 		goal = null;
 		solvable = false;
-		var pq = new MinPQ<Node>(new hamming_order());
-		var pq_twin = new MinPQ<Node>(new hamming_order());
+		var pq = new MinPQ<Node>(new manhattan_order());
+		var pq_twin = new MinPQ<Node>(new manhattan_order());
 		pq.insert(new Node(initial, 0, null));
-		pq_twin.insert(new Node(initial, 0, null));
+		pq_twin.insert(new Node(initial.twin(), 0, null));
 
-		int flag;
+		int flag = 0;
 		while (true) {
 			if (!pq.isEmpty()) {
 				flag = process(pq);
