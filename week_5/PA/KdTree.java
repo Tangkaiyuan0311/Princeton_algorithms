@@ -44,13 +44,14 @@ public class KdTree {
 			root = insert(root, p, Vertical, new RectHV(0, 0, 1, 1));
 		else
 			root = insert(root, p, root.level, root.rect);
-		N++;
 
 	}
 	// insert p into tree, assuming p is in associated rect, level should be tree's level, rect should be tree's rect
 	private Node insert(Node tree, Point2D p, boolean level, RectHV rect) {
-		if (tree == null)
+		if (tree == null) {
+			N++;
 			return new Node(p, level, rect);
+		}
 		assert (tree.rect.contains(p));
 		if (p.compareTo(tree.point) == 0)
 			return tree; // do nothing

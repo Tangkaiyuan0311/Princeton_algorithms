@@ -6,11 +6,13 @@ javac -classpath /home/tky/algs4:. ./PointSET.java
 
 javac -classpath /home/tky/algs4:. ./KdTree.java
 #java -classpath /home/tky/algs4:. KdTree
-#javac -classpath /home/tky/algs4:. ./KdTreeVisualizer.java
+javac -classpath /home/tky/algs4:. ./KdTreeVisualizer.java
 #java -classpath /home/tky/algs4:. KdTreeVisualizer
-#javac -classpath /home/tky/algs4:. ./RangeSearchVisualizer.java
+javac -classpath /home/tky/algs4:. ./RangeSearchVisualizer.java
 #java -classpath /home/tky/algs4:. RangeSearchVisualizer input10.txt
 javac -classpath /home/tky/algs4:. ./NearestNeighborVisualizer.java
-java -classpath /home/tky/algs4:. NearestNeighborVisualizer input10.txt
+#java -classpath /home/tky/algs4:. NearestNeighborVisualizer input10.txt
 
 # javac -classpath /home/tky/algs4:. ./KdTreeGenerator.java
+
+zip kdtree.zip PointSET.java KdTree.java
