@@ -1,0 +1,12 @@
+#!/bin/bash
+# script file for pa
+
+javac -classpath /home/tky/algs4:. ./Graph.java
+#java -classpath /home/tky/algs4:. Graph mediumG.txt
+
+javac -classpath /home/tky/algs4:. ./DepthFirstPaths.java
+javac -classpath /home/tky/algs4:. ./BreadthFirstPaths.java
+
+#java -classpath /home/tky/algs4:. DepthFirstPaths tinyG.txt 0
+#java -classpath /home/tky/algs4:. BreadthFirstPaths tinyG.txt 0
+
