@@ -1,0 +1,16 @@
+#!/bin/bash
+# script file for pa
+
+#javac -classpath /home/tky/algs4:. ./WordNet.java
+#java -classpath /home/tky/algs4:. WordNet
+
+#javac -classpath /home/tky/algs4:. ./SAP.java
+#java -classpath /home/tky/algs4:. SAP digraph1.txt
+
+javac -classpath /home/tky/algs4:. ./Outcast.java
+java -classpath /home/tky/algs4:. Outcast synsets.txt hypernyms.txt outcast5.txt outcast8.txt outcast11.txt
+
+
+
+
+
