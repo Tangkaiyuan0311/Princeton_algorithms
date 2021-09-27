@@ -9,12 +9,16 @@ public class SAP {
 	
 	private final Digraph G;
 	// software cache
-	int[] cache_s; // v, w, sa, sa_len  vw is exchangeable
-	Object[] cache_m; // iterable<Integer> (v, w), sa, sa_len
+	private int[] cache_s; // v, w, sa, sa_len  vw is exchangeable
+	private Object[] cache_m; // iterable<Integer> (v, w), sa, sa_len
+	// unchecked cast of Object array into Iterable<Integer> and int remains a question
+	// solution: create a cache class
 
 	// constructor takes a digraph (not necessarily a DAG)
 	public SAP(Digraph G) {
 		// SAP should be immutable, a deep copy constructor, since Digraph is mutable
+		if (G == null)
+			throw new IllegalArgumentException("null constructor argument");
 		this.G = new Digraph(G);
 		this.cache_s = new int[]{-1, -1, -1, -1};
 		this.cache_m = new Object[]{null, null, null, null};
@@ -22,6 +26,9 @@ public class SAP {
 	}
 
 	private void sap(int v, int w) {
+
+		if (((v < 0) || (v >= G.V()))||((w < 0) || (w >= G.V())))
+			throw new IllegalArgumentException("vertex out of range");
 		
 		int sa_len = Integer.MAX_VALUE; // shortest ancestor path lenth
         int sa = -1; // shortest ancestor
@@ -58,14 +65,23 @@ public class SAP {
 		markw[w] = true;
 		setw.add(w);
 
-
+		boolean stopw = false;
+		boolean stopv = false;
 		// two bfs in lockstep
-		while (!qv.isEmpty() || !qw.isEmpty()) {
-			if (!qv.isEmpty()) {
+		while (!stopv || !stopw) {
+
+			if (qv.isEmpty())
+                stopv = true;
+            if (qw.isEmpty())
+                stopw = true;
+
+			if (!stopv) {
 				// bfs on v
 				int x = qv.dequeue();
-				if (dv[x]+1 >= sa_len) // next distance is longer than current shortest path, no need to move on
-					break;
+				if (dv[x]+1 >= sa_len) {// next distance is longer than current shortest path, no need to move on
+					stopv = true;
+					continue;
+				}
 				for (int i : G.adj(x)) 
 					if (!markv[i]) {
 						markv[i] = true;
@@ -78,11 +94,13 @@ public class SAP {
 						}
 					}
 			}
-			if (!qw.isEmpty()) {
+			if (!stopw) {
 				// bfs on w
 				int y = qw.dequeue();
-				if (dw[y]+1 >= sa_len) // next distance is longer than current shortest path, no need to move on
-					break;
+				if (dw[y]+1 >= sa_len) { // next distance is longer than current shortest path, no need to move on
+					stopw = true;
+					continue;
+				}
 				for (int i : G.adj(y)) 
 					if (!markw[i]) {
 						markw[i] = true;
@@ -114,6 +132,9 @@ public class SAP {
 	
 	
 	private void sap(Iterable<Integer> v, Iterable<Integer> w) {
+
+		if (v == null || w == null)
+			throw new IllegalArgumentException("null argument");
 		int sa_len = Integer.MAX_VALUE; // shortest ancestor path lenth
         int sa = -1; // shortest ancestor
 
@@ -151,14 +172,24 @@ public class SAP {
 			markw[i] = true;
 			setw.add(i);
 		}
-
+		
+		boolean stopv = false;
+		boolean stopw = false;
 		// two bfs in lockstep
-        while (!qv.isEmpty() || !qw.isEmpty()) {
-            if (!qv.isEmpty()) {
+        while (!stopv || !stopw) {
+
+			if (qv.isEmpty())
+				stopv = true;
+			if (qw.isEmpty())
+				stopw = true;
+
+            if (!stopv) {
                 // bfs on v
                 int x = qv.dequeue();
-                if (dv[x]+1 >= sa_len) // next distance is longer than current shortest path, no need to move on
-                    break;
+                if (dv[x]+1 >= sa_len) {// next distance is longer than current shortest path, no need to move on
+                    stopv = true;
+					continue;
+				}
                 for (int i : G.adj(x))
                     if (!markv[i]) {
                         markv[i] = true;
@@ -171,11 +202,13 @@ public class SAP {
                         }
                     }
             }
-            if (!qw.isEmpty()) {
+            if (!stopw) {
                 // bfs on w
                 int y = qw.dequeue();
-                if (dw[y]+1 >= sa_len) // next distance is longer than current shortest path, no need to move on
-                    break;
+                if (dw[y]+1 >= sa_len) {// next distance is longer than current shortest path, no need to move on
+                    stopw = true;
+					continue;
+				}
                 for (int i : G.adj(y))
                     if (!markw[i]) {
                         markw[i] = true;
@@ -229,7 +262,7 @@ public class SAP {
             set.add(i);
         for (int i : w)
             if (set.contains(i)) {
-				System.out.println("intersects: " + i);
+				// System.out.println("intersects: " + i);
                 return i;
 			}
 		return -1;
@@ -237,6 +270,8 @@ public class SAP {
 
 	// length of shortest ancestral path between v and w; -1 if no such path
 	public int length(int v, int w) {
+		if (((v < 0) || (v >= G.V()))||((w < 0) || (w >= G.V())))
+            throw new IllegalArgumentException("vertex out of range");
 		//check cache
 		if (((v == cache_s[0]) && (w == cache_s[1])) || ((v == cache_s[1]) && (w == cache_s[0])))
 			return cache_s[3];
@@ -248,6 +283,8 @@ public class SAP {
 
 	// a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
 	public int ancestor(int v, int w) {
+		if (((v < 0) || (v >= G.V()))||((w < 0) || (w >= G.V())))
+            throw new IllegalArgumentException("vertex out of range");
 		if (((v == cache_s[0]) && (w == cache_s[1])) || ((v == cache_s[1]) && (w == cache_s[0])))
             return cache_s[2];
         else {
@@ -257,8 +294,22 @@ public class SAP {
 	}
 
 
+	// v == null, item == null, item out of range
+	private boolean invalid(Iterable<Integer> v) {
+		if (v == null)
+			return true;
+		for (var i : v) {
+			if (i == null)
+				return true;
+			if ((i < 0) || (i >= G.V()))
+				return true;
+		}
+		return false;
+	}
 	// length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
 	public int length(Iterable<Integer> v, Iterable<Integer> w) {
+		if (invalid(v) || invalid(w))
+			throw new IllegalArgumentException("invalid item in the iterable");
 		if ((same(v, (Iterable<Integer>)cache_m[0]) && same(w, (Iterable<Integer>)cache_m[1])) || (same(v, (Iterable<Integer>)cache_m[1]) && same(w, (Iterable<Integer>)cache_m[0])))
             return (int)cache_m[3];
         else {
@@ -269,6 +320,8 @@ public class SAP {
 
 	// a common ancestor that participates in shortest ancestral path; -1 if no such path
 	public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
+		if (invalid(v) || invalid(w))
+            throw new IllegalArgumentException("invalid item in the iterable");
 		if ((same(v, (Iterable<Integer>)cache_m[0]) && same(w, (Iterable<Integer>)cache_m[1])) || (same(v, (Iterable<Integer>)cache_m[1]) && same(w, (Iterable<Integer>)cache_m[0])))
             return (int)cache_m[2];
         else {
@@ -283,17 +336,26 @@ public class SAP {
 		In in = new In(args[0]);
 		Digraph G = new Digraph(in);
 		SAP sap = new SAP(G);
-		/*
+		
 		SET<Integer> v = new SET<Integer>();
-		v.add(0);
-		//v.add(2);
+		v.add(37935);
+		v.add(58348);
+		v.add(70335);
 		SET<Integer> w = new SET<Integer>();
-		w.add(8);
-		w.add(9);
+		w.add(8933);
+		w.add(29622);
+		w.add(34056);
+		w.add(36346);
+		w.add(39170);
+		w.add(43249);
+		w.add(44450);
+		w.add(44754);
+		w.add(47060);
+		w.add(57570);
+		w.add(77103);
 		int length   = sap.length(v, w);
         int ancestor = sap.ancestor(v, w);
         StdOut.printf("length = %d, ancestor = %d\n", length, ancestor);
-		*/
 		/*
 		while (!StdIn.isEmpty()) {
 			int v = StdIn.readInt();
