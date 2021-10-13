@@ -1,0 +1,8 @@
+#!/bin/bash
+# script file for pa
+
+javac -classpath /home/tky/algs4:. ./Edge.java
+javac -classpath /home/tky/algs4:. ./EdgeWeightedGraph.java
+javac -classpath /home/tky/algs4:. ./PrimMST.java
+javac -classpath /home/tky/algs4:. ./KruskalMST.java
+
