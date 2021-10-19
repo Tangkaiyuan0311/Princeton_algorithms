@@ -6,3 +6,7 @@ javac -classpath /home/tky/algs4:. ./EdgeWeightedGraph.java
 javac -classpath /home/tky/algs4:. ./PrimMST.java
 javac -classpath /home/tky/algs4:. ./KruskalMST.java
 
+javac -classpath /home/tky/algs4:. ./DirectedEdge.java
+javac -classpath /home/tky/algs4:. ./EdgeWeightedDigraph.java
+java -classpath /home/tky/algs4:. ./EdgeWeightedDigraph.java ./tinyEWD.txt
+

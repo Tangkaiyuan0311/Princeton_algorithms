@@ -8,15 +8,9 @@
             "type": "java",
             "name": "Launch with Arguments Prompt",
             "request": "launch",
-            "mainClass": "DijkstraSP",
+            "mainClass": "ResizeDemo",
             "args": "${command:SpecifyProgramArgs}"
         },
         
-        {
-            "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
     ]
 }
