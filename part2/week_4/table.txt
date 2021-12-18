@@ -1,0 +1,8 @@
+she 0
+sells 1
+sea 2
+shells 3
+by 4
+the 5
+sea 6
+shore 7
