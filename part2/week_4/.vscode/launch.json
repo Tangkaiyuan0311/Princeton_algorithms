@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Launch with Arguments Prompt",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "TST",
             "args": "${command:SpecifyProgramArgs}"
         },
         {

@@ -8,6 +8,7 @@ public class TrieST<Value> {
     private static class Node {
         Object value; // null or val of key
         Node[] next = new Node[R]; // reference for each char value
+        // can not create array of generic object, so node has to be static
     }
     private Node root; // null initialized
     
