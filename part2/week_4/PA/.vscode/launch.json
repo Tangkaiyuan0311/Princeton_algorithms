@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Launch with Arguments Prompt",
             "request": "launch",
-            "mainClass": "BoyerMoore",
+            "mainClass": "BoggleSolver",
             "args": "${command:SpecifyProgramArgs}"
         },
         {
@@ -19,10 +19,24 @@
         },
         {
             "type": "java",
-            "name": "Launch TrieST",
+            "name": "Launch BoggleBoard",
             "request": "launch",
-            "mainClass": "TrieST",
-            "projectName": "week_4_5b291b16"
+            "mainClass": "BoggleBoard",
+            "projectName": "PA_7487bf8a"
+        },
+        {
+            "type": "java",
+            "name": "Launch BoggleGame",
+            "request": "launch",
+            "mainClass": "BoggleGame",
+            "projectName": "PA_7487bf8a"
+        },
+        {
+            "type": "java",
+            "name": "Launch BoggleSolver",
+            "request": "launch",
+            "mainClass": "BoggleSolver",
+            "projectName": "PA_7487bf8a"
         }
     ]
 }
