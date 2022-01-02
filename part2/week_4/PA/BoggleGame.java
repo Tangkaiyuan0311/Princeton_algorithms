@@ -49,7 +49,7 @@ import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.SET;
 
 public class BoggleGame extends JFrame {
-    private static final int GAME_TIME = 180;                 // in seconds
+    private static final int GAME_TIME = 360;                 // in seconds
     private static final int SECONDS_PER_MINUTE = 60;         // number of seconds in one minute
     private static final int FOUND_WORDS_DISPLAY_COUNT = 17;  // how many rows to display for the two side columns
     private static final int ALL_WORDS_DISPLAY_COUNT   = 7;   // how many rows to display for the middle all-words list
