@@ -1,0 +1,15 @@
+#!/bin/bash
+# script file for pa
+
+#java BurrowsWheeler - < abra.txt > abra.txt.bwt
+#java MoveToFront - < abra.txt.bwt > abra.txt.bwt.mtf
+#java edu.princeton.cs.algs4.Huffman - < abra.txt.bwt.mtf > abra.txt.bwt.mtf.huf
+
+#javac BurrowsWheeler.java
+#javac MoveToFront.java
+#javac CircularSuffixArray.java
+
+java BurrowsWheeler - < aesop.txt | java MoveToFront - | java edu.princeton.cs.algs4.Huffman - > aesop.txt.bwt.mtf.huf
+#java edu.princeton.cs.algs4.Huffman + < aesop.txt.bwt.mtf.huf | java MoveToFront + | java BurrowsWheeler + > aesop.re.txt
+
+#zip burrows.zip BurrowsWheeler.java MoveToFront.java CircularSuffixArray.java
